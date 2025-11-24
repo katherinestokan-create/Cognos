@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+  body, html {
+    margin:0;
+    padding:0;
+    height:100%;
+    overflow:hidden;
+  }
+  iframe {
+    width:100%;
+    height:100%;
+    border:none;
+  }
+</style>
 <script>
-function go() {
-  // Base Cognos pathRef link (do not change this)
+function refreshReport() {
   const baseUrl = "https://cfasp-sci.sce.manh.com/bi/?pathRef=.public_folders/Custom%20Content/Katherine%20DEVELOPMENT/Reports/Goal%20Boards%20-%20V1%20GADC2%20VIEW&type=reportView";
-
-  // Add cache-buster: current timestamp
   const cacheBuster = "&reload=" + new Date().getTime();
-
-  // Load Cognos with cache-buster
-  window.location.href = baseUrl + cacheBuster;
+  document.getElementById("cognosFrame").src = baseUrl + cacheBuster;
 }
 
-// Wait 5 minutes (300,000 ms), then refresh
-setTimeout(go, 300000);
-
-// Immediately load Cognos on page open
-window.onload = go;
+window.onload = refreshReport;              // Load immediately
+setInterval(refreshReport, 300000);         // Reload every 5 minutes
 </script>
 </head>
 <body>
-Loading Cognos report...
+<iframe id="cognosFrame"></iframe>
 </body>
 </html>
-
