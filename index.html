@@ -3,11 +3,20 @@
 <head>
 <script>
 function go() {
-  window.location.href = "https://cfasp-sci.sce.manh.com/bi/?pathRef=.public_folders/Custom%20Content/Katherine%20DEVELOPMENT/Reports/Goal%20Boards%20-%20V1%20GADC2%20VIEW&type=reportView";
+  // Base Cognos pathRef link (do not change this)
+  const baseUrl = "https://cfasp-sci.sce.manh.com/bi/?pathRef=.public_folders/Custom%20Content/Katherine%20DEVELOPMENT/Reports/Goal%20Boards%20-%20V1%20GADC2%20VIEW&type=reportView";
+
+  // Add cache-buster: current timestamp
+  const cacheBuster = "&reload=" + new Date().getTime();
+
+  // Load Cognos with cache-buster
+  window.location.href = baseUrl + cacheBuster;
 }
-// Wait 5 minutes (300,000 ms), then go
+
+// Wait 5 minutes (300,000 ms), then refresh
 setTimeout(go, 300000);
-// Also go immediately on load
+
+// Immediately load Cognos on page open
 window.onload = go;
 </script>
 </head>
@@ -15,3 +24,4 @@ window.onload = go;
 Loading Cognos report...
 </body>
 </html>
+
